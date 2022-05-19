@@ -20,6 +20,11 @@
 #define __WINDOWS__ 1
 #endif
 
+#if HAVE_SYSTEM == 0
+#undef SPP_HAVE_SYSTEM
+#define SPP_HAVE_SYSTEM 0
+#endif
+
 static char *spp_var_get(char *var) {
 	return r_sys_getenv (var);
 }
