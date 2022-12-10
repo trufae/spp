@@ -47,12 +47,12 @@
   #endif
   typedef int socklen_t;
   #undef USE_SOCKETS
-  #define __WINDOWS__ 1
+  #define R2__WINDOWS__ 1
   #undef __UNIX__
   #undef __BSD__
 #endif
 
-#if __WINDOWS__ || __WIN32__ || __MINGW32__
+#if __WINDOWS__ || R2__WINDOWS__ || __WIN32__ || __MINGW32__
 #include <io.h>
 #define popen    _popen
 #define pclose   _pclose
@@ -104,13 +104,13 @@ typedef struct SppState {
 } SppState;
 
 typedef struct SppBuf {
-    char *lbuf;
-    int lbuf_s;
-    int lbuf_n;
+	char *lbuf;
+	int lbuf_s;
+	int lbuf_n;
 } SppBuf;
 
+/* XXX swap arguments ?? well mainly take a state on all callbacks !, output can go inside */
 #define ARG_CALLBACK(x) int x (char *arg)
-/* XXX swap arguments ?? */
 #define TAG_CALLBACK(x) int x (SppState *state, Output *out, char *buf)
 #define PUT_CALLBACK(x) int x (Output *out, char *buf)
 #define IS_SPACE(x) ((x==' ')||(x=='\t')||(x=='\r')||(x=='\n'))
