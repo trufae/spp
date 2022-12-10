@@ -10,14 +10,14 @@
 #if __WIN32__
 #undef SPP_HAVE_SYSTEM
 #define SPP_HAVE_SYSTEM 0
-#undef __WINDOWS__
-#define __WINDOWS__ 1
+#undef R2__WINDOWS__
+#define R2__WINDOWS__ 1
 #endif
 #ifdef _MSC_VER
 #undef SPP_HAVE_SYSTEM
 #define SPP_HAVE_SYSTEM 0
-#undef __WINDOWS__
-#define __WINDOWS__ 1
+#undef R2__WINDOWS__
+#define R2__WINDOWS__ 1
 #endif
 
 #if HAVE_SYSTEM == 0
@@ -108,7 +108,7 @@ static TAG_CALLBACK(spp_getrandom) {
 		return 0;
 	}
 	// XXX srsly? this is pretty bad random
-#if __WINDOWS__
+#if R2__WINDOWS__
 	srand (r_sys_getpid ());
 #else
 	srandom (r_sys_getpid ()); // TODO: change this to be portable
@@ -241,7 +241,7 @@ static TAG_CALLBACK(spp_ifeq) {
 	if (eq) {
 		*eq = '\0';
 		value = spp_var_get(value);
-		if (value && !strcmp(value, eq+1)) {
+		if (value && !strcmp (value, eq + 1)) {
 			state->echo[state->ifl + 1] = 1;
 		} else state->echo[state->ifl + 1] = 0;
 //fprintf(stderr, "IFEQ(%s)(%s)=%d\n", buf, eq+1, echo[ifl]);
